@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux'
 import logo from './logo.svg';
 import './App.css';
@@ -60,20 +61,44 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-class App extends Component {
+let nextTodoId = 0;
+class TodoApp extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <button onClick={() => {
+            store.dispatch({
+              type: 'ADD_TODO',
+              text: 'Test',
+              id: nextTodoId++
+            });
+          }}>
+          Add Todo
+        </button>
+        <ul>
+          {this.props.todos.map(todo =>
+            <li key={todo.id}>
+              {todo.text}
+            </li>
+          )}
+        </ul>
       </div>
-    );
-  }
+    )
+  };
 }
 
-export default App;
+const render = () => {
+  ReactDOM.render(
+    // Render the TodoApp Component to the <div> with id 'root'
+    <TodoApp
+      todos={store.getState().todos}
+    />,
+    document.getElementById('root')
+
+  )
+};
+
+store.subscribe(render);
+render();
+
+export default TodoApp;
