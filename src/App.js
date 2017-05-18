@@ -82,6 +82,32 @@ const Link = ({
   );
 };
 
+class FilterLink extends Component {
+  render () {
+    const props = this.props;
+    // this just reads the store, is not listening
+    // for change messages from the store updating
+    const state = store.getState();
+
+    return (
+      <Link
+        active={
+          props.filter ===
+          state.visibilityFilter
+        }
+        onClick={() =>
+          store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            filter: props.filter
+          })
+        }
+      >
+        {props.children}
+      </Link>
+    );
+  }
+}
+
 const Footer = () => (
   <p>
     Show:
