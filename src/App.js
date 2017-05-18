@@ -104,6 +104,24 @@ const getVisibleTodos = (
   }
 }
 
+const Todo = ({
+  onClick,
+  completed,
+  text
+}) => (
+  <li
+    onClick={onClick}
+    style={{
+      textDecoration:
+        completed ?
+          'line-through' :
+          'none'
+    }}
+  >
+    {text}
+  </li>
+);
+
 
 let nextTodoId = 0;
 class TodoApp extends Component {
