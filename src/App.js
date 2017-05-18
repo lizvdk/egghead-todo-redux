@@ -95,6 +95,8 @@ const getVisibleTodos = (
       return todos.filter(
         t => !t.completed
       );
+    default:
+      return todos;
   }
 }
 
