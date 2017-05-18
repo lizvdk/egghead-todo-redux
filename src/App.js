@@ -170,19 +170,15 @@ class TodoApp extends Component {
     );
     return (
       <div>
-        <input ref={node => {
-          this.input = node
-        }} />
-        <button onClick={() => {
+        <AddTodo
+          onAddClick={text =>
             store.dispatch({
               type: 'ADD_TODO',
-              text: this.input.value,
-              id: nextTodoId++
-            });
-            this.input.value = '';
-          }}>
-          Add Todo
-        </button>
+              id: nextTodoId++,
+              text
+            })
+          }
+        />
         <TodoList
           todos={visibleTodos}
           onTodoClick={id =>
