@@ -61,20 +61,20 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
-const FilterLink = ({
-  filter,
-  currentFilter,
+const Link = ({
+  active,
   children,
   onClick
 }) => {
-  if (filter === currentFilter) {
+  if (active) {
     return <span>{children}</span>
   }
+
   return (
     <a href='#'
       onClick={e => {
         e.preventDefault();
-        onClick(filter);
+        onClick();
       }}
     >
       {children}
