@@ -61,6 +61,25 @@ const todoApp = combineReducers({
 
 const store = createStore(todoApp);
 
+const FilterLink = ({
+  filter,
+  children
+}) => {
+  return (
+    <a href='#'
+       onClick={e => {
+         e.preventDefault();
+         store.dispatch({
+           type: 'SET_VISIBILITY_FILTER',
+           filter
+         });
+       }}
+    >
+      {children}
+    </a>
+  )
+}
+
 let nextTodoId = 0;
 class TodoApp extends Component {
   render() {
