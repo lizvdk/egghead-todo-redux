@@ -172,7 +172,7 @@ const render = () => {
   ReactDOM.render(
     // Render the TodoApp Component to the <div> with id 'root'
     <TodoApp
-      todos={store.getState().todos}
+      {...store.getState()}
     />,
     document.getElementById('root')
 
