@@ -83,6 +83,14 @@ const Link = ({
 };
 
 class FilterLink extends Component {
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+  componentWillUnmount() {
+    this.unsubscribe(); // return value of `store.subscribe()`
+  }
   render () {
     const props = this.props;
     // this just reads the store, is not listening
