@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 import logo from './logo.svg';
 import './App.css';
 
@@ -58,21 +59,6 @@ const todoApp = combineReducers({
   todos,
   visibilityFilter
 });
-
-class Provider extends Component {
-  getChildContext() {
-    return {
-      store: this.props.store // This corresponds to the `store` passed in as a prop
-    };
-  }
-  render() {
-    return this.props.children;
-  }
-}
-
-Provider.childContextTypes = {
-  store: React.PropTypes.object
-}
 
 const Link = ({
   active,
