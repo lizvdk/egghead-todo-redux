@@ -267,9 +267,10 @@ const TodoApp = ({ store }) => (
   </div>
 );
 
-// Note this render does not belong to `TodoApp`
 ReactDOM.render(
-  <TodoApp store={createStore(todoApp)} />,
+  <Provider store={createStore(todoApp)}>
+    <TodoApp />
+  </Provider>,
   document.getElementById('root')
 );
 
