@@ -59,8 +59,6 @@ const todoApp = combineReducers({
   visibilityFilter
 });
 
-const store = createStore(todoApp);
-
 const Link = ({
   active,
   children,
@@ -260,7 +258,7 @@ const TodoApp = () => (
 
 // Note this render does not belong to `TodoApp`
 ReactDOM.render(
-  <TodoApp />,
+  <TodoApp store={createStore(todoApp)} />,
   document.getElementById('root')
 );
 
