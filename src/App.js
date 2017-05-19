@@ -59,6 +59,12 @@ const todoApp = combineReducers({
   visibilityFilter
 });
 
+class Provider extends Component {
+  render() {
+    return this.props.children;
+  }
+}
+
 const Link = ({
   active,
   children,
