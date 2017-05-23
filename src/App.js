@@ -206,6 +206,15 @@ const Todo = ({
   </li>
 );
 
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos (
+      state.todos,
+      state.visibilityFilter
+    )
+  };
+}
+
 class VisibleTodoList extends Component {
   componentDidMount() {
     const { store } = this.context;
