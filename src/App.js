@@ -215,6 +215,17 @@ const mapStateToProps = (state) => {
   };
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onTodoClick: (id) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      })
+    }
+  };
+};
+
 class VisibleTodoList extends Component {
   componentDidMount() {
     const { store } = this.context;
