@@ -163,7 +163,7 @@ const getVisibleTodos = (
 }
 
 let nextTodoId = 0;
-const AddTodo = (props, { store }) => {
+let AddTodo = ({ dispatch }) => {
   let input;
 
   return (
@@ -172,7 +172,7 @@ const AddTodo = (props, { store }) => {
         input = node;
       }} />
       <button onClick={() => {
-          store.dispatch({
+          dispatch({
             type: 'ADD_TODO',
             id: nextTodoId++,
             text: input.value
@@ -184,9 +184,6 @@ const AddTodo = (props, { store }) => {
     </div>
   );
 };
-AddTodo.contextTypes = {
-  store: React.PropTypes.object
-}
 
 AddTodo = connect(
   null, // Wasteful to subscribe to store when it's not needed-- null tells connect that there is no need to subscibe to the store
