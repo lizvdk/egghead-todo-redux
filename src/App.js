@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import logo from './logo.svg';
 import './App.css';
@@ -206,6 +206,21 @@ const Todo = ({
   </li>
 );
 
+const TodoList = ({
+  todos,
+  onTodoClick
+}) => (
+  <ul>
+    {todos.map(todo =>
+      <Todo
+        key={todo.id}
+        {...todo}
+        onClick={() => onTodoClick(todo.id)}
+      />
+    )}
+  </ul>
+)
+
 const mapStateToProps = (state) => {
   return {
     todos: getVisibleTodos (
@@ -226,59 +241,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class VisibleTodoList extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const props = this.props;
-    const { store } = this.context;
-    const state = store.getState();
-
-    return (
-      <TodoList
-        todos={
-          getVisibleTodos(
-            state.todos,
-            state.visibilityFilter
-          )
-        }
-        onTodoClick={id =>
-          store.dispatch({
-            type: 'TOGGLE_TODO',
-            id
-          })
-        }
-      />
-    );
-  }
-}
-VisibleTodoList.contextTypes = {
-  store: React.PropTypes.object
-}
-
-const TodoList = ({
-  todos,
-  onTodoClick
-}) => (
-  <ul>
-    {todos.map(todo =>
-      <Todo
-        key={todo.id}
-        {...todo}
-        onClick={() => onTodoClick(todo.id)}
-      />
-    )}
-  </ul>
-)
+const VisibleTodoList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
 
 const TodoApp = () => (
   <div>
