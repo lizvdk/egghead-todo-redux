@@ -221,7 +221,8 @@ const TodoList = ({
   </ul>
 )
 
-const mapStateToProps = (state) => {
+// Generating the TodoList Container Component
+const mapStateToTodoListProps = (state) => {
   return {
     todos: getVisibleTodos (
       state.todos,
@@ -229,8 +230,7 @@ const mapStateToProps = (state) => {
     )
   };
 }
-
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToTodoListProps = (dispatch) => {
   return {
     onTodoClick: (id) => {
       dispatch({
@@ -240,10 +240,9 @@ const mapDispatchToProps = (dispatch) => {
     }
   };
 };
-
 const VisibleTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToTodoListProps,
+  mapDispatchToTodoListProps
 )(TodoList);
 
 const TodoApp = () => (
