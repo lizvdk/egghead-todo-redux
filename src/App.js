@@ -188,6 +188,11 @@ AddTodo.contextTypes = {
   store: React.PropTypes.object
 }
 
+AddTodo = connect(
+  null, // Wasteful to subscribe to store when it's not needed-- null tells connect that there is no need to subscibe to the store
+  null // doesn't need any callback props, just accepts dispatch function itself --- null = dipatch injected as a prop
+)(AddTodo); // specifies which component to wrap
+
 const Todo = ({
   onClick,
   completed,
